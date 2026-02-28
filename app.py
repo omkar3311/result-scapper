@@ -13,15 +13,10 @@ if not os.path.exists(csv_file):
     st.stop()
 
 df = pd.read_csv(csv_file)
-
-st.subheader("📄 Results (Original Order)")
-st.dataframe(df, use_container_width=True)
-
-st.divider()
-
 ranked_df = df.sort_values(by="percentage", ascending=False).reset_index(drop=True)
 ranked_df.index += 1
 ranked_df.insert(0, "Rank", ranked_df.index)
+
 
 col1, col2 = st.columns([1, 2])
 
@@ -43,3 +38,9 @@ with col2:
             st.dataframe(matches, use_container_width=True)
         else:
             st.warning("No matching name found")
+st.divider()
+
+st.subheader("📄 Results (Original Order)")
+st.dataframe(df, use_container_width=True)
+
+
